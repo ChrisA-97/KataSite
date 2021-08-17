@@ -27,6 +27,9 @@ function incrementString (strng) {
 //Returns a Map<String, int> with the structure {r: 255, g: 153, b: 51} where r, g, and b range from 0 through 255
 function hexStringToRGB(hexString) {
     let split = hexString.split("")
+    for (char of split) {
+        char = char.toUpperCase()
+    }
     let rStr = split[1] + split[2]
     let gStr = split[3] + split[4]
     let bStr = split[5] + split[6]

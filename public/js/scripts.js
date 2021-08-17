@@ -1,4 +1,6 @@
-const handleVowelSubmit = () => {
+const handleVowelSubmit = (event) => {
+    event.preventDefault()
+    console.log("!!!")
     let output = document.getElementById('vowelOutput')
     let vowelValue = document.getElementById('vowelInput').value
     let request = {
@@ -10,9 +12,15 @@ const handleVowelSubmit = () => {
         })
 }
 
-const handleIncrementSubmit = () => {
+const handleIncrementSubmit = (event) => {
+    event.preventDefault()
     let output = document.getElementById('incrementOutput')
-    let incrementValue = document.getElementById("incrementInput").value
+    let incrementValue
+    if (output.innerHTML == "") {
+        incrementValue = document.getElementById("incrementInput").value
+    } else {
+        incrementValue = document.getElementById('incrementOutput').innerHTML
+    }
     let request = {
         "message": incrementValue
     }
@@ -34,12 +42,27 @@ const incrementAgain = () => {
         })
 }
 
-const handleHexSubmit = () => {
+const handleHexSubmit = (event) => {
+    event.preventDefault()
+
     let colorOutput = document.getElementById('hexColor')
     let redOutput = document.getElementById('red')
     let greenOutput = document.getElementById('green')
     let blueOutput = document.getElementById('blue')
+
     let hexValue = document.getElementById('hexInput').value
+    
+    let isValid = validateHexSubmit(hexValue)
+
+    if(isValid) {
+        document.getElementById('hexInput').classList.add("is-valid")
+        console.log("im valid")
+    } else {
+        document.getElementById('hexInput').classList.add("is-invalid")
+        document.getElementById('hexInput').style.borderColor = 'red'
+        console.log("im not")
+        return false
+    }
     let request = {
         "message": hexValue
     }
@@ -52,3 +75,23 @@ const handleHexSubmit = () => {
             blueOutput.innerHTML = result.b
         })
 }
+
+(function () {
+    'use strict'
+  
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.querySelectorAll('.needs-validation')
+  
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms)
+      .forEach(function (form) {
+        form.addEventListener('submit', function (event) {
+          if (!form.checkValidity()) {
+            event.preventDefault()
+            event.stopPropagation()
+          }
+  
+          form.classList.add('was-validated')
+        }, false)
+      })
+  })()

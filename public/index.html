@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>Title</title>
-    <!-- <link rel="stylesheet" href="./css/style.css"> -->
+    <link rel="stylesheet" href="./css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -16,10 +16,28 @@
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <label for="vowelCount">Enter a word to see how many vowels it contains</label>
-            <input type="text" id="vowelInput"><br/>
-            <button type="button" class="btn btn-primary" id="vowelSubmit" onClick="handleVowelSubmit()">Submit</button><br/>
+            <h3>Vowel Count: </h3>
+            <p>
+              Return the number (count) of vowels in the given string.
+              We will consider a, e, i, o, u as vowels for this Kata (but not y).
+              The input string will only consist of lower case letters and/or spaces.
+            </p>
+            <a href='https://www.codewars.com/kata/54ff3102c1bad923760001f3'><p>Source</p></a>
+            <form class="needs-validation" onsubmit="handleVowelSubmit(event)" novalidate>
+              <label class="form-label" for="vowelInput">Submit: </label>
+              <input class='form-control' type="text" id="vowelInput" required>
+              <div class="invalid-feedback">
+                Please enter a word
+              </div>
+              <br>
+              <button type="submit" class="btn btn-primary" id="vowelSubmit" >Submit</button><br/>
+              <hr>
+            </form>
             <h2 id="vowelOutput"></h2>
+            <!-- <label class="form-label" for="vowelCount">Submit: </label><br/>
+            <input class='form-control' type="text" id="vowelInput" required>
+            <button type="button" class="btn btn-primary" id="vowelSubmit" onClick="handleVowelSubmit()">Submit</button><br/>
+            <h2 id="vowelOutput"></h2> -->
           </div>
         </div>
       </div>
@@ -31,11 +49,24 @@
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <label for="incrementString">Enter a valid string:</label>
-            <input type="text" id="incrementInput"><br/><br/>
-            <button type="button" class="btn btn-primary" id="incrementSubmit" onClick="handleIncrementSubmit()">Submit</button>
-            <button type="button" class="btn btn-primary" id="incrementAgain" onClick="incrementAgain()">Increment Again</button><br/>
-            <h2 id="incrementOutput"></h2>
+            <h3>String Incrementer: </h3>
+            <p>
+              Your job is to write a function which increments a string, to create a new string.
+              If the string already ends with a number, the number should be incremented by 1.
+              If the string does not end with a number. the number 1 should be appended to the new string.
+            </p>
+            <a href='https://www.codewars.com/kata/54a91a4883a7de5d7800009c'><p>Source</p></a>
+            <form class="needs-validation" onsubmit="handleIncrementSubmit(event)" novalidate>
+              <label class="needs-validation" for="incrementInput">Submit: </label>
+              <input class='form-control' type="text" id="incrementInput" required>
+              <div class="invalid-feedback">
+                Please enter a word
+              </div>
+              <br>
+              <button type="submit" class="btn btn-primary" id="incrementSubmit">Increment</button><br/>
+              <hr>
+              <h2 id="incrementOutput"></h2>
+            </form>
           </div>
         </div>
       </div>
@@ -47,15 +78,38 @@
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
           <div class="accordion-body">
-            <label for="hexCount">Enter a valid hex color value:</label>
-            <input type="text" id="hexInput"><br/>
-            <button type="button" class="btn btn-primary" id="hexSubmit" onClick="handleHexSubmit()">Submit</button><br/>
-            <h2 id="hexColor">Your Color</h2><br>
-            <h2>R: <span id="red"></span>  G:<span id="green"></span>  B:<span id="blue"></span></h2>          
+            <h3>Hex Value to RGB: </h3>
+            <p>
+              When working with color values it can sometimes be useful to extract the individual red, green, and blue (RGB) component values for a color. Implement a function that meets these requirements:
+              <ul>
+                <li>
+                  Accepts a case-insensitive hexadecimal color string as its parameter (ex. "#FF9933" or "#ff9933")
+                </li>
+                <li>
+                  Returns an object with the structure {r: 255, g: 153, b: 51} where r, g, and b range from 0 through 255
+                </li>
+              </ul>
+            </p>
+            <a href='https://www.codewars.com/kata/5282b48bb70058e4c4000fa7'><p>Source</p></a>
+            <form class="needs-validation" onsubmit="handleHexSubmit(event)" novalidate>
+              <label class="needs-validation" for="hexInput">Submit: </label>
+              <input class='form-control' type="text" id="hexInput" required>
+              <div class="invalid-feedback">
+                Please enter a valid hex color value |
+                Hint: You need six characters(0-9, A-F) preceded by a '#' |
+                Example: #AB12F7
+              </div>
+              <br>
+              <button type="submit" class="btn btn-primary" id="hexSubmit">Submit</button><br>
+              <hr>
+              <h2 id="hexColor">Your Color</h2><br>
+              <h2>R: <span id="red"></span>  G:<span id="green"></span>  B:<span id="blue"></span></h2>           
+            </form>
           </div>
         </div>
       </div>
     </div>
     <script src="./js/scripts.js"></script>
+    <script src="./js/validation.js"></script>
   </body>
 </html>
