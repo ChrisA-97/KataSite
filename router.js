@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const fs = require('fs')
-var { vowelCount } = require('./katas')
+var { vowelCount, incrementString, hexStringToRGB } = require('./katas')
 
 
 async function buildRouter() {
@@ -17,6 +17,26 @@ async function buildRouter() {
         if (message) {
             let result = vowelCount(message)
             res.status(200).json({ "result": result})
+        } else {
+            res.status(400)
+        }
+    })
+
+    router.post('/incrementString', (req, res) => {
+        let message = req.body.message
+        if (message) {
+            let result = incrementString(message)
+            res.status(200).json({ "result" : result})
+        } else {
+            res.status(400)
+        }
+    })
+
+    router.post('/hexValue', (req, res) => {
+        let message = req.body.message
+        if (message) {
+            let result = hexStringToRGB(message)
+            res.status(200).json({ "result" : result})
         } else {
             res.status(400)
         }
