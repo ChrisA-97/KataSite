@@ -12,8 +12,9 @@ async function buildRouter() {
         res.status(200).json({ "message": "Hello!" })
     })
 
-    router.post('/vowelCount', (req, res) => {
-        let message = req.body.message
+
+    router.get('/vowelCount', (req, res) => {
+        let message = req.query.message
         if (message) {
             let result = vowelCount(message)
             res.status(200).json({ "result": result})
@@ -22,8 +23,8 @@ async function buildRouter() {
         }
     })
 
-    router.post('/incrementString', (req, res) => {
-        let message = req.body.message
+    router.get('/incrementString', (req, res) => {
+        let message = req.query.message
         if (message) {
             let result = incrementString(message)
             res.status(200).json({ "result" : result})
@@ -32,8 +33,8 @@ async function buildRouter() {
         }
     })
 
-    router.post('/hexValue', (req, res) => {
-        let message = req.body.message
+    router.get('/hexValue', (req, res) => {
+        let message = req.query.message
         if (message) {
             let result = hexStringToRGB(message)
             res.status(200).json({ "result" : result})

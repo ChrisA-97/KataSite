@@ -1,15 +1,29 @@
 const handleVowelSubmit = (event) => {
     event.preventDefault()
-    console.log("!!!")
     let output = document.getElementById('vowelOutput')
     let vowelValue = document.getElementById('vowelInput').value
-    let request = {
-        "message": vowelValue
+
+    if(vowelValue != "") {
+        document.getElementById('vowelInput').classList.remove('is-invalid')
+        document.getElementById('vowelInput').classList.add("is-valid")
+    } else {
+        document.getElementById('vowelInput').classList.remove('is-valid')
+        document.getElementById('vowelInput').classList.add("is-invalid")
+        return false
     }
-    axios.post("http://localhost:3000/vowelCount", request)
-        .then((response) => {
-            output.innerHTML = response.data.result 
-        })
+
+    const options = {
+        method: 'GET',
+        url: 'https://personal-kata-site.herokuapp.com/vowelCount',
+        params: {message: vowelValue},
+        headers: {'Content-Type': 'application/json'}
+      };
+      
+      axios.request(options).then(function (response) {
+        output.innerHTML = response.data.result
+      }).catch(function (error) {
+        console.error(error);
+      });
 }
 
 const handleIncrementSubmit = (event) => {
@@ -21,25 +35,28 @@ const handleIncrementSubmit = (event) => {
     } else {
         incrementValue = document.getElementById('incrementOutput').innerHTML
     }
-    let request = {
-        "message": incrementValue
-    }
-    axios.post("http://localhost:3000/incrementString", request)
-        .then((response) => {
-            output.innerHTML = response.data.result
-        })
-}
 
-const incrementAgain = () => {
-    let output = document.getElementById('incrementOutput')
-    let incrementValue = output.innerHTML
-    let request = {
-        "message": incrementValue
+    if(incrementValue != "") {
+        document.getElementById('incrementInput').classList.remove('is-invalid')
+        document.getElementById('incrementInput').classList.add("is-valid")
+    } else {
+        document.getElementById('incrementInput').classList.remove('is-valid')
+        document.getElementById('incrementInput').classList.add("is-invalid")
+        return false
     }
-    axios.post("http://localhost:3000/incrementString", request)
-        .then((response) => {
-            output.innerHTML = response.data.result
-        })
+
+    const options = {
+        method: 'GET',
+        url: 'https://personal-kata-site.herokuapp.com/incrementString',
+        params: {message: incrementValue},
+        headers: {'Content-Type': 'application/json'}
+      };
+      
+      axios.request(options).then(function (response) {
+        output.innerHTML = response.data.result
+      }).catch(function (error) {
+        console.error(error);
+      });
 }
 
 const handleHexSubmit = (event) => {
@@ -55,43 +72,27 @@ const handleHexSubmit = (event) => {
     let isValid = validateHexSubmit(hexValue)
 
     if(isValid) {
+        document.getElementById('hexInput').classList.remove('is-invalid')
         document.getElementById('hexInput').classList.add("is-valid")
-        console.log("im valid")
     } else {
+        document.getElementById('hexInput').classList.remove('is-valid')
         document.getElementById('hexInput').classList.add("is-invalid")
-        document.getElementById('hexInput').style.borderColor = 'red'
-        console.log("im not")
         return false
     }
-    let request = {
-        "message": hexValue
-    }
-    axios.post("http://localhost:3000/hexValue", request)
-        .then((response) => {
-            let result = response.data.result
+    const options = {
+        method: 'GET',
+        url: 'https://personal-kata-site.herokuapp.com/hexValue',
+        params: {message: hexValue},
+        headers: {'Content-Type': 'application/json'}
+      };
+      
+      axios.request(options).then(function (response) {
+        let result = response.data.result
             colorOutput.style.color = hexValue
             redOutput.innerHTML = result.r
             greenOutput.innerHTML = result.g
             blueOutput.innerHTML = result.b
-        })
+      }).catch(function (error) {
+        console.error(error);
+      });
 }
-
-(function () {
-    'use strict'
-  
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.querySelectorAll('.needs-validation')
-  
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms)
-      .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-  
-          form.classList.add('was-validated')
-        }, false)
-      })
-  })()
